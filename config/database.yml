@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: Rails_React_One_App
+  username: anomaly
+  password: Rebel123@
+
+test:
+  <<: *default
+  database: Rails_React_One_App_test
+  username: anomaly
+  password: Rebel123@
+  timeout: 5000
+
+
+production:
+  <<: *default
+  database: Rails_React_One_App_production
+  username: Rails_React_One_App
+  password: <%= ENV["BLOG_WITH_RAILS_DATABASE_PASSWORD"] %>
