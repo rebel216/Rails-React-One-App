@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMessage } from '../redux/greetingsReducer';
 import axios from 'axios';
 
 const Greeting = () => {
-  const [message , getMessage] = useState(["hi"]);
-  //const message = useSelector((state) => state.greeting);
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.greeting);
 
   async function fetchMessage() {
     await axios.get('api/messages').then((response) => {
-      getMessage(response.data.greeting);
-      console.log({message})
+      dispatch(getMessage(response.data.greeting));
     });
   }
 
-  // useEffect(() => {
-  //   fetchMessage();
-  // }, []);
+  useEffect(() => {
+    fetchMessage();
+  }, []);
 
   return (
     <div>
